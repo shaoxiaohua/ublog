@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--这个地方必须是对应的接口的权限定名称-->
+<mapper namespace="com.ysm.ublog.mapper.Myinfo_mapper">
+
+    <select id="findnewfriends" parameterType="com.ysm.ublog.myinfo.pojo.Find_newfriend" resultType="com.ysm.ublog.myinfo.pojo.Re_find_newfriend">
+        select t_user.id id,t_user.nickname nickname,t_user.school_name school_name,t_user.major_name major_name,t_user.user_img user_img,
+          t_tags.photo photo,t_tags.kaoyan kaoyan,t_tags.travel travel,t_tags.game game,t_tags.sport sport,t_tags.music music,t_tags.cet cet,t_tags.movie movie
+        from t_user,t_tags
+        <where>
+            <if test="find_newfriend.user!=null">
+                and t_user.id=t_tags.uid
+            </if>
+            <if test="find_newfriend.user.nickname!=null ">
+                and t_user.nickname=#{find_newfriend.user.nickname}
+            </if>
+            <if test="find_newfriend.user.school_name!=null">
+                and t_user.school_name=#{find_newfriend.user.school_name}
+            </if>
+            <if test="find_newfriend.user.major_name!=null">
+                and t_user.major_name=#{find_newfriend.user.major_name}
+            </if>
+            <if test="find_newfriend.tags.photo==1">
+                and t_tags.photo=1
+            </if>
+            <if test="find_newfriend.tags.kaoyan==1">
+                and t_tags.kaoyan=1
+            </if>
+            <if test="find_newfriend.tags.travel==1">
+                and t_tags.travel=1
+            </if>
+            <if test="find_newfriend.tags.game==1">
+                and t_tags.game=1
+            </if>
+            <if test="find_newfriend.tags.sport==1">
+                and t_tags.sport=1
+            </if>
+            <if test="find_newfriend.tags.music==1">
+                and t_tags.music=1
+            </if>
+            <if test="find_newfriend.tags.cet==1">
+                and t_tags.cet=1
+            </if>
+            <if test="find_newfriend.tags.movie==1">
+                and t_tags.movie=1
+            </if>
+        </where>
+    </select>
+
+
+    <select id="find_onepeople_tags_by_id" parameterType="int" resultType="com.ysm.ublog.myinfo.pojo.t_tags">
+        select * from t_tags where uid=#{id}
+    </select>
+    <select id="find_onepeople_user_by_id" parameterType="int" resultType="com.ysm.ublog.myinfo.pojo.t_user">
+        select * from t_user where id=#{id}
+    </select>
+
+    <insert id="add_wait_friend" parameterType="com.ysm.ublog.myinfo.pojo.wait_friend">
+        insert into wait_friend(uid,fid,msg,status) values(#{wait_friend.uid},#{wait_friend.fid},
+        <if test="wait_friend.msg!=null and wait_friend.msg!=''">
+            #{wait_friend.msg}
+        </if>
+        <if test="wait_friend.msg==null or wait_friend.msg==''">
+            "请求添加好友"
+        </if>
+        ,0)
+    </insert>
+
+    <select id="find_all_newfriend_no_img" parameterType="int" resultType="com.ysm.ublog.myinfo.pojo.wait_friend">
+        select * from wait_friend where uid=#{uid}
+    </select>
+
+    <select id="find_img_by_id" parameterType="int" resultType="string">
+        select user_img from t_user where id=#{uid}
+    </select>
+
+    <update id="delete_apply_newfriend" parameterType="int">
+        update wait_friend set status=2 where uid=#{fid} and fid=#{uid}
+    </update>
+    <update id="change_agree_wait_friend" parameterType="int">
+        update wait_friend set status=1 where uid=#{fid} and fid=#{uid}
+    </update>
+
+    <insert id="add_user_friend" parameterType="int">
+        insert into user_friend(uid,fid,staus) values (#{uid},#{fid},0)
+    </insert>
+
+    <update id="add_reply_to_wait_friend" parameterType="com.ysm.ublog.myinfo.pojo.Fid_and_reply">
+        update wait_friend set reply=#{fid_and_reply.reply} where uid=#{fid_and_reply.fid} and fid=#{fid_and_reply.uid}
+    </update>
+
+    <select id="show_my_friend" parameterType="int" resultType="com.ysm.ublog.myinfo.pojo.t_user">
+        select * from t_user WHERE id IN (SELECT fid  FROM user_friend WHERE uid=#{fid} AND staus =0  UNION ALL SELECT uid FROM user_friend WHERE fid=#{fid} AND staus=0);
+    </select>
+
+    <update id="change_myinfo" parameterType="com.ysm.ublog.myinfo.pojo.Find_newfriend">
+        update t_user set nickname=#{myallinfo.user.nickname},signature=#{myallinfo.user.signature},gender=#{myallinfo.user.gender},
+        school_name=#{myallinfo.user.school_name},major_name=#{myallinfo.user.major_name} where id=#{myallinfo.user.id};
+    </update>
+    <update id="change_tags" parameterType="com.ysm.ublog.myinfo.pojo.Find_newfriend">
+        update t_tags set photo=#{myallinfo.tags.photo},kaoyan=#{myallinfo.tags.kaoyan},travel=#{myallinfo.tags.travel},
+        game=#{myallinfo.tags.game},sport=#{myallinfo.tags.sport},music=#{myallinfo.tags.music},cet=#{myallinfo.tags.cet},
+        movie=#{myallinfo.tags.movie} where uid=#{myallinfo.user.id};
+    </update>
+
+</mapper>
+
+    

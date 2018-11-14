@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--这个地方必须是对应的接口的权限定名称-->
+<mapper namespace="com.ysm.ublog.mapper.Shop_mapper">
+
+    <select id="show_all_shop_ing" resultType="com.ysm.ublog.shop.pojo.t_outside_activity">
+        select * from t_outside_activity where status=0
+    </select>
+
+    <insert id="add_mycoupon" parameterType="int">
+        insert into t_coupon_my values (#{uid},#{cid})
+    </insert>
+
+    <select id="all_coupon" resultType="com.ysm.ublog.shop.pojo.t_coupon">
+        select * from t_coupon where status=0
+    </select>
+
+    <select id="myhave_coupon_id" parameterType="int" resultType="int">
+        select  coupon_id from t_coupon_my where uid=#{uid}
+    </select>
+
+    <select id="already_have_coupon" parameterType="int" resultType="com.ysm.ublog.shop.pojo.t_coupon">
+        select t_coupon.* from t_coupon,t_coupon_my where uid=#{uid} and t_coupon.id=t_coupon_my.coupon_id and t_coupon.status=0
+    </select>
+</mapper>
+    
