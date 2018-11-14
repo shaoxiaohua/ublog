@@ -90,6 +90,7 @@
     </dependencies>
 
     <build>
+	<finalname>traaaaa</finalname>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
