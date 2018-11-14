@@ -12,7 +12,7 @@ public interface FriendCircleService {
    //添加评论
     void addComment(T_friend_circle_comment t_friend_circle_comment);
      //得到所有的朋友圈
-    String getAllMessage();
+    List<T_friend_circle_message> getAllMessage();
 
     List<String> getAllKey();
 }

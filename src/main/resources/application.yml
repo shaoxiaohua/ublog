@@ -8,3 +8,6 @@ spring:
     host: qianfeng1.qfjava.cn
     port: 8400
     password: redis001
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

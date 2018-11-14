@@ -8,6 +8,7 @@ import com.ysm.ublog.utils.RedisUtils;
 import com.ysm.ublog.utils.ToJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
@@ -23,11 +24,12 @@ public class FriendCircleServiceImpl implements FriendCircleService {
 
     //将朋友圈的信息存到缓存中
     @Override
+    @Transactional
     public void addFriendMessage(T_friend_circle_message t_friend_message) {
         Jedis jedis = jedisPool.getResource();
         RedisUtils.hSet("ysmmessage"+t_friend_message.getId(),t_friend_message,jedis);
         frinendCircleMapper.addFriendMessage(t_friend_message);
-        System.out.println(t_friend_message.getId()+".......");
+        System.out.println(t_friend_message.getId());
         jedis.close();
     }
    //添加评论
@@ -38,6 +40,7 @@ public class FriendCircleServiceImpl implements FriendCircleService {
         Integer fcmid = t_friend_circle_comment.getFcmid();
         //key是朋友圈id，字段名是用户id+创建时间，value是创建时间
         jedis.hset("ysmComment"+fcmid,t_friend_circle_comment.getUid()+nowtime,t_friend_circle_comment.getContent());
+        //有缓存代表成功存到缓存
         System.out.println(jedis.hgetAll("ysmComment" + fcmid)+"xxxxxx");
         frinendCircleMapper.addComment(t_friend_circle_comment);
         jedis.close();
@@ -45,24 +48,9 @@ public class FriendCircleServiceImpl implements FriendCircleService {
 
    //获得所有的朋友圈内容
     @Override
-    public String getAllMessage() {
-        Jedis jedis = jedisPool.getResource();
-        List<String> allKey = getAllKey();
-        List<Map<String,String>> list = null;
-        System.out.println(allKey);
-        if(false){
-            //说明数据库中的内容保存到了缓存中
-            for (String s : allKey) {
-                Map<String, String> map = jedis.hgetAll("ysmMessage" + s);
-                list.add(map);
-            }
-            System.out.println(list+"************");
-            return ToJson.toJson(list);
-        }else{
-             List<T_friend_circle_message> messages = frinendCircleMapper.getAllMessage();
-             String allmessage = ToJson.toJson(messages);
-             System.out.println(allmessage);
-             return allmessage;}
+    public List<T_friend_circle_message> getAllMessage() {
+        List<T_friend_circle_message> messages = frinendCircleMapper.getAllMessage();
+        return messages;
     }
 
     //得到所有的朋友圈id

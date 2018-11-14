@@ -11,7 +11,7 @@ public interface FriendCircleMapper {
 
     List<T_friend_circle_message> getAllMessage();
 
-    void addFriendMessage(@Param("t_friend_message") T_friend_circle_message t_friend_message);
+    int addFriendMessage(@Param("t_friend_message") T_friend_circle_message t_friend_message);
 
     void addComment(@Param("t_friend_comment") T_friend_circle_comment t_friend_circle_comment);
 

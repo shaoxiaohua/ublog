@@ -5,10 +5,12 @@ import com.ysm.ublog.user.service.UserService;
 import com.ysm.ublog.utils.MessageSendUtils;
 import com.ysm.ublog.utils.ToJson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -44,12 +46,13 @@ public class UserController {
     }
 
 
-    @RequestMapping("/login")
+    @RequestMapping("login")
     public String loginbefore(String username,String password){
         System.out.println(username+"....."+password);
         userService.login(username,password);
-        return "success";
+        return "loginsuccess";
     }
+
 
     @RequestMapping("/mobilecode")
     public String mobileCode(String mobile){

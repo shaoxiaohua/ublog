@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class T_friend_circle_message {
-    private String id;
+    private int id;
     private int uid;
     private String content;
     private String picture;
@@ -13,7 +13,7 @@ public class T_friend_circle_message {
     private int isown;
     private List<T_friend_circle_comment> commentslist;
 
-    public T_friend_circle_message(String id, int uid, String content, String picture, String location, Date createtime, int isown, List<T_friend_circle_comment> commentslist) {
+    public T_friend_circle_message(int id, int uid, String content, String picture, String location, Date createtime, int isown, List<T_friend_circle_comment> commentslist) {
         this.id = id;
         this.uid = uid;
         this.content = content;
@@ -43,11 +43,11 @@ public class T_friend_circle_message {
         this.isown = is_own;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

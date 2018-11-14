@@ -54,26 +54,14 @@ public class ShiroConfig {
         return new LifecycleBeanPostProcessor();
     }
 
-    @Bean
-    public FilterRegistrationBean delegatingFilterProxy() {
-        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-        DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy("shiroFilter");
-        filterRegistrationBean.setFilter(delegatingFilterProxy);
-        filterRegistrationBean.addUrlPatterns("/*");
-        filterRegistrationBean.setEnabled(true);
-        filterRegistrationBean.addInitParameter("targetFilterLifecycle", "true");
-        return filterRegistrationBean;
-    }
-
-
 
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         shiroFilterFactoryBean.setLoginUrl("");
-        shiroFilterFactoryBean.setUnauthorizedUrl("");
-        shiroFilterFactoryBean.setSuccessUrl("");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/user/error");
+        shiroFilterFactoryBean.setSuccessUrl("/user/error");
         return shiroFilterFactoryBean;
     }
 

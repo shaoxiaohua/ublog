@@ -4,8 +4,6 @@ import com.ysm.ublog.friend_circle.entity.T_friend_circle_comment;
 import com.ysm.ublog.friend_circle.entity.T_friend_circle_message;
 import com.ysm.ublog.friend_circle.service.FriendCircleService;
 import com.ysm.ublog.utils.GetDateTimeUtils;
-import com.ysm.ublog.utils.RandomNumUtils;
-import com.ysm.ublog.utils.ToJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 
 
 @Controller
@@ -26,7 +25,7 @@ public class FriendCircleController {
    //添加朋友圈
     @RequestMapping(value="/submitcontent",method = RequestMethod.POST)
     @ResponseBody
-    public String submitFriend(@RequestBody T_friend_circle_message t_friend_message,HttpServletRequest request){
+    public T_friend_circle_message submitFriend(@RequestBody T_friend_circle_message t_friend_message,HttpServletRequest request){
 
         /*将图片添加到服务器中
       for (MultipartFile multipartFile : multipartFiles) {
@@ -39,32 +38,27 @@ public class FriendCircleController {
         t_friend_message.setCreatetime(GetDateTimeUtils.getNowTime());
         //1代表全部可见，0代表自己可见
         t_friend_message.setIsown(1);
-        t_friend_message.setId("ysmmessage"+RandomNumUtils.randomnummber(3));
-
+        System.out.println(t_friend_message.getId()+"........................................");
         friendCircleService.addFriendMessage(t_friend_message);
-        String message = ToJson.toJson(t_friend_message);
-        return message;
+        return t_friend_message;
     }
 //查询所有朋友圈
     @RequestMapping("/getallmessage")
     @ResponseBody
-    public String getallmessage(){
-        String messages = friendCircleService.getAllMessage();
+    public List<T_friend_circle_message> getallmessage(){
+        List<T_friend_circle_message> messages = friendCircleService.getAllMessage();
         return messages;
 
     }
     //添加评论
    @RequestMapping("/sendcomment")
    @ResponseBody
-    public String sendComment(@RequestBody T_friend_circle_comment t_friend_circle_comment) throws IOException {
-         if(t_friend_circle_comment.getContent()!=null){
+    public T_friend_circle_comment sendComment(@RequestBody T_friend_circle_comment t_friend_circle_comment) throws IOException {
+         if(t_friend_circle_comment.getContent()!=null) {
              t_friend_circle_comment.setCreate_time(GetDateTimeUtils.getNowTime());
              friendCircleService.addComment(t_friend_circle_comment);
-         }else{
-             return "error";
          }
-       String comment = ToJson.toJson(t_friend_circle_comment);
-       return comment;
+         return t_friend_circle_comment;
     }
 
 }

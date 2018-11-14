@@ -4,8 +4,11 @@
         "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace中写的就是该接口的全名称 -->
 <mapper namespace="com.ysm.ublog.mapper.FriendCircleMapper">
-    <insert id="addFriendMessage" parameterType="com.ysm.ublog.friend_circle.entity.T_friend_circle_message" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        insert into t_friend_circle_message (id,uid,content,picture,location,createtime) values (#{t_friend_message.id},#{t_friend_message.uid},
+    <insert id="addFriendMessage" parameterType="com.ysm.ublog.friend_circle.entity.T_friend_circle_message">
+        <selectKey keyProperty="t_friend_message.id" order="AFTER" resultType="java.lang.Integer"  >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_friend_circle_message (uid,content,picture,location,createtime) values (#{t_friend_message.uid},
         #{t_friend_message.content},#{t_friend_message.picture},#{t_friend_message.location},#{t_friend_message.createtime}
         )
     </insert>
