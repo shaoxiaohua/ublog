@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.4//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace中写的就是该接口的全名称 -->
+<mapper namespace="com.ysm.ublog.mapper.UserMapper">
+    <insert id="addUser" parameterType="com.ysm.ublog.user.pojo.T_user">
+        insert into t_user (nickname,gender,phone,school_name,major_name,signature,user_img,password,salt) values (
+        #{t_user.nickname},#{t_user.gender},#{t_user.phone},#{t_user.school_name},
+        #{t_user.major_name},#{t_user.signature},#{t_user.user_img},#{t_user.password},
+        #{t_user.salt}
+        )
+
+    </insert>
+    <select id="findUserByName" resultType="com.ysm.ublog.user.pojo.T_user">
+       select id,nickname,phone,password,salt from t_user where phone=#{username} or nickname=#{username}
+    </select>
+</mapper>

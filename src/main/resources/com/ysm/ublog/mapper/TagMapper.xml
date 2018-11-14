@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.4//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace中写的就是该接口的全名称 -->
+<mapper namespace="com.ysm.ublog.mapper.TagMapper">
+    <insert id="addUserTag" parameterType="com.ysm.ublog.tag.entity.T_tags">
+        insert into t_tags (uid,photo,kaoyan,travel,game,sport,music,cet,movie) values (#{t_tag.uid},
+        #{t_tag.photo},#{t_tag.kaoyan},#{t_tag.travel},#{t_tag.game},#{t_tag.sport},#{t_tag.music},#{t_tag.cet},#{t_tag.movie}
+        )
+    </insert>
+</mapper>

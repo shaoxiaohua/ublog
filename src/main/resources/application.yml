@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    username: mrj
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///ublog?useSSL=false&serverTimezone=UTC
+  redis:
+    host: qianfeng1.qfjava.cn
+    port: 8400
+    password: redis001

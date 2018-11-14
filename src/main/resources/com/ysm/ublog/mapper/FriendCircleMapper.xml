@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.4//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace中写的就是该接口的全名称 -->
+<mapper namespace="com.ysm.ublog.mapper.FriendCircleMapper">
+    <insert id="addFriendMessage" parameterType="com.ysm.ublog.friend_circle.entity.T_friend_circle_message" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into t_friend_circle_message (id,uid,content,picture,location,createtime) values (#{t_friend_message.id},#{t_friend_message.uid},
+        #{t_friend_message.content},#{t_friend_message.picture},#{t_friend_message.location},#{t_friend_message.createtime}
+        )
+    </insert>
+
+    <insert id="addComment" parameterType="com.ysm.ublog.friend_circle.entity.T_friend_circle_comment">
+        insert into t_friend_circle_comment (id,fcmid,uid,content,create_time) values (#{t_friend_comment.id},#{t_friend_comment.fcmid},#{t_friend_comment.uid}
+        ,#{t_friend_comment.content},#{t_friend_comment.create_time})
+    </insert>
+    
+    <resultMap id="getMessageMap" type="com.ysm.ublog.friend_circle.entity.T_friend_circle_message">
+        <id property="id" column="fid"/>
+        <result property="uid" column="uid"/>
+        <result property="content" column="content"/>
+        <result property="picture" column="picture"/>
+        <result property="location" column="location"/>
+        <result property="createtime" column="createtime"/>
+        <collection property="commentslist" ofType="com.ysm.ublog.friend_circle.entity.T_friend_circle_comment">
+            <id property="id" column="id" />
+            <result property="content" column="contentc"/>
+            <result property="create_time" column="create_time"/>
+        </collection>
+    </resultMap>
+    
+    <select id="getAllMessage" resultMap="getMessageMap">
+        select fcm.id as fid,fcm.uid,fcm.content,fcm.picture,fcm.location,fcm.createtime,fcc.content as contentc,fcc.create_time from t_friend_circle_message fcm, t_friend_circle_comment fcc
+        where fcm.id=fcc.fcmid
+    </select>
+
+    <select id="getAllMessageKey" resultType="string">
+        select id from t_friend_circle_message
+    </select>
+</mapper>
