@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysm.ublog.mapper.RecommendMapper">
+    <resultMap id="recommendmap" type="com.ysm.ublog.recommend.pojo.Recommend">
+        <id property="rid" column="rid"/>
+        <result column="smallimg" property="smallimg"/>
+        <result column="nickname" property="nickname"/>
+        <result column="picture" property="content"/>
+        <result column="user_img" property="user_img"/>
+        <result column="commentnum" property="commentnum"/>
+    </resultMap>
+
+    <select id="findAllRecommend"  resultMap="recommendmap">
+        SELECT fcm.`id` rid, c.`img_small` smallimg, u.`nickname`,fcm.`picture`,fcm.`content`,u.`user_img`,COUNT(fcc.`id`) 'commentnum' FROM t_friend_circle_message fcm INNER JOIN t_friend_circle_comment fcc ON fcm.`id` = fcc.`fcmid` INNER JOIN t_user u ON u.`id`=fcm.`uid` INNER JOIN t_category c ON c.`id`=fcm.`categoryid` GROUP BY fcm.`id` ORDER BY COUNT(fcc.`id`)  DESC;
+    </select>
+
+
+</mapper>

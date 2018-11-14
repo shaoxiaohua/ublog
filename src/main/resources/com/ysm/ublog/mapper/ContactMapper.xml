@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysm.ublog.mapper.ContactMapper">
+
+    <select id="getAllContact" resultType="com.ysm.ublog.contact.pojo.Contact" parameterType="com.ysm.ublog.contact.pojo.Contact">
+
+select id,nickname,gender,phone,school_name,major_name,signature,user_img,password,salt from t_user WHERE id IN (SELECT fid  FROM user_friend WHERE uid=#{fid} AND staus =0  UNION ALL SELECT uid FROM user_friend WHERE fid=#{fid} AND staus=0);
+
+
+    </select>
+    <update id="delContact" parameterType="int">
+        UPDATE user_friend SET staus =1 WHERE uid = #{uid} AND fid = #{fid} OR uid = #{fid} AND fid = #{uid};
+    </update>
+
+</mapper>

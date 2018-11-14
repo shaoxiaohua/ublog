@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>聊天页面</title>
+    <script src="js/jquery-1.12.4.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var websocket = null;
+
+        $(function () {
+
+
+            if ('WebSocket' in window) {
+                websocket = new WebSocket("ws://" + document.location.host + "/websocket/");
+
+                websocket.onopen = function () {
+                    alert("与服务器已经建立连接,您可以与好友聊天了...");
+                }
+                websocket.onclose = function () {
+                    alert("连接关闭");
+                }
+                websocket.onerro = function () {
+                    alert("连接错误");
+                }
+                //	客户端接收服务端数据时触发
+                websocket.onmessage = function (message) {
+                    $("#msgDiv").html(evt.data);
+                }
+
+            } else {
+                alert("不好意思您的浏览器不支持websocket,请升级您的浏览器.......")
+            }
+
+            function doSend() {
+              var message =   $("#inputMsg").val();
+              websocket.send(message);
+              alert("发送成功");
+            }
+
+        });
+
+
+    </script>
+
+</head>
+<body>
+        <h3>消息发送</h3>
+        请输入：<textarea rows="8" cols="50" id="inputMsg" name="inputMsg"></textarea>
+        <button onclick="doSend();">发送</button>
+        <hr/>
+        <textarea rows="10" cols="70" id="msgDiv"></textarea>
+
+</body>
+</html>

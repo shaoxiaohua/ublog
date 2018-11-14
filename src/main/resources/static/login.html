@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>login</title>
+    <title>登陆并加入websockt连接</title>
+    <script type="text/javascript" src="js/jquery-1.12.4.js">
+        function he() {
+            alert("hello");
+        }
+
+    </script>
+
 </head>
 <body>
-  登录成功
+        <form action="/chat/getmessagelist" method="get">
+            用户名:<input type="text"/>
+            密码:<input type="text"/>
+            <input type="submit" value="提交"/>
+        </form>
 </body>
 </html>

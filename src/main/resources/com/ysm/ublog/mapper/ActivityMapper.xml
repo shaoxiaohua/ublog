@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysm.ublog.mapper.ActivityMapper">
+    <resultMap id="actvoresultmap" type="com.ysm.ublog.vo.ActivityVo">
+        <id property="vid" column="id"></id>
+        <result property="category_name" column="name"></result>
+        <association property="activity" javaType="com.ysm.ublog.activity.pojo.Activity">
+            <id property="id" column="id"></id>
+            <result property="theme" column="theme"></result>
+            <result property="place" column="place"></result>
+            <result property="title" column="title"/>
+            <result property="content" column="content"/>
+            <result property="begin_time" column="begin_time"/>
+            <result property="fee" column="fee"/>
+            <result property="cate_add" column="cate_add"/>
+            <result property="cate_id" column="cate_id"/>
+        </association>
+
+    </resultMap>
+    <select id="findAllActivity" resultMap="actvoresultmap">
+        SELECT a.*,c.`name` FROM t_category c INNER JOIN t_activity a ON c.`id`=a.`cate_id` WHERE a.`cate_id`=#{id};
+    </select>
+
+</mapper>
