@@ -22,7 +22,7 @@ public class RecommendController {
     private RecommendService recommendService;
     @CrossOrigin
     @RequestMapping("/getallrecommend")
-    public List<Recommend> getAllRecommend(@RequestParam int pagenum,@RequestParam int pagesize){
-        return recommendService.findAllRecommend(pagenum,pagesize);
+    public List<Recommend> getAllRecommend(){
+        return recommendService.findAllRecommend();
     }
 }

@@ -5,7 +5,6 @@ import com.ysm.ublog.friend_circle.entity.T_friend_circle_message;
 import com.ysm.ublog.friend_circle.service.FriendCircleService;
 import com.ysm.ublog.mapper.FriendCircleMapper;
 import com.ysm.ublog.utils.RedisUtils;
-import com.ysm.ublog.utils.ToJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +12,6 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class FriendCircleServiceImpl implements FriendCircleService {

@@ -1,7 +1,9 @@
 package com.ysm.ublog.utils;
 
 import com.sun.javaws.jnl.PropertyDesc;
+import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -14,6 +16,9 @@ import java.util.List;
 
 //将对象保存到缓存中
 public class RedisUtils {
+
+    @Autowired
+    static JedisPool jedisPool;
 
     public static void hSet(String key, Object object, Jedis jedis){
         //获取对象中的属性，并将其添加到缓存中
@@ -47,4 +52,14 @@ public class RedisUtils {
             }
         }
     }
+
+
+    public static int get_user_id() {
+        Jedis jedis=jedisPool.getResource();
+        String uidstr=jedis.get("key");
+        int uid=Integer.parseInt(uidstr);
+        return uid;
+    }
+
+
 }

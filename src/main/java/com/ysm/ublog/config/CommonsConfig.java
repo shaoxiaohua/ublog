@@ -1,10 +1,14 @@
 package com.ysm.ublog.config;
 
+import com.ysm.ublog.utils.FastDfsUtils;
+import org.csource.common.MyException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+
+import java.io.IOException;
 
 @Configuration
 public class CommonsConfig {
@@ -30,5 +34,10 @@ public class CommonsConfig {
         jedisPoolConfig.setMaxIdle(100);
         jedisPoolConfig.setMinIdle(10);
         return jedisPoolConfig;
+    }
+    @Bean
+    public FastDfsUtils fastDfsUtils() throws IOException, MyException {
+        FastDfsUtils fastDfsUtils = new FastDfsUtils("classpath:conf.properties");
+        return  fastDfsUtils;
     }
 }

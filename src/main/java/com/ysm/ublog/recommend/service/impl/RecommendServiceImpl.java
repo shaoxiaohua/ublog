@@ -1,8 +1,6 @@
 package com.ysm.ublog.recommend.service.impl;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+
 import com.ysm.ublog.mapper.RecommendMapper;
 import com.ysm.ublog.recommend.pojo.Recommend;
 import com.ysm.ublog.recommend.service.RecommendService;
@@ -22,11 +20,8 @@ public class RecommendServiceImpl implements RecommendService {
     private RecommendMapper mapper;
 
     @Override
-    public List<Recommend> findAllRecommend(int pagenum,int pagesize) {
-        PageHelper.startPage(pagenum, pagesize);
-        List<Recommend> allRecommend = mapper.findAllRecommend();
-        PageInfo<Recommend> recommendPageInfo = new PageInfo<>(allRecommend);
+    public List<Recommend> findAllRecommend() {
 
-        return null;
+        return  mapper.findAllRecommend();
     }
 }

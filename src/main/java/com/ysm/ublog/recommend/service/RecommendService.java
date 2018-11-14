@@ -9,5 +9,5 @@ import java.util.List;
  * @date 2018/11/14 16:25.
  */
 public interface RecommendService {
-    List<Recommend> findAllRecommend(int pagenum,int pagesize);
+    List<Recommend> findAllRecommend();
 }

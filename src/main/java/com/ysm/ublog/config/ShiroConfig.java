@@ -59,9 +59,9 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        shiroFilterFactoryBean.setLoginUrl("");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/user/error");
-        shiroFilterFactoryBean.setSuccessUrl("/user/error");
+        shiroFilterFactoryBean.setLoginUrl("/login.html");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/error.html");
+        shiroFilterFactoryBean.setSuccessUrl("/index.html");
         return shiroFilterFactoryBean;
     }
 

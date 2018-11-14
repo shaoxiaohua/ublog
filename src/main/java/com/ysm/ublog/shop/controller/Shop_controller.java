@@ -1,6 +1,5 @@
 package com.ysm.ublog.shop.controller;
 
-import com.ysm.ublog.config.Commons_config;
 import com.ysm.ublog.myinfo.pojo.Result_pojo;
 import com.ysm.ublog.shop.pojo.Get_coupon;
 import com.ysm.ublog.shop.pojo.t_coupon;
@@ -11,12 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/shop")

@@ -1,5 +1,7 @@
 package com.ysm.ublog.myinfo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class t_user {
     private int id;
     private String nickname;
@@ -9,6 +11,7 @@ public class t_user {
     private String major_name;
     private String signature;
     private String user_img;
+    @JsonIgnore
     private String password;
 
     public int getId() {

@@ -1,21 +1,15 @@
 package com.ysm.ublog.shop.service.impl;
 
-import com.ysm.ublog.config.Commons_config;
 import com.ysm.ublog.mapper.Shop_mapper;
 import com.ysm.ublog.shop.pojo.Get_coupon;
 import com.ysm.ublog.shop.pojo.t_coupon;
 import com.ysm.ublog.shop.pojo.t_outside_activity;
 import com.ysm.ublog.shop.service.Shop_service;
-import com.ysm.ublog.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class Shop_service_impl implements Shop_service {

@@ -1,9 +1,9 @@
 spring:
   datasource:
-    username: mrj
-    password: 123456
+    username: root
+    password: qishimeiyoumima
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql:///ublog?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://qianfeng1.qfjava.cn:8300/ublog?useUnicode=true&characterEncoding=utf8
   redis:
     host: qianfeng1.qfjava.cn
     port: 8400

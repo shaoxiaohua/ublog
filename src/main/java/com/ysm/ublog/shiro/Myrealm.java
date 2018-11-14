@@ -4,18 +4,9 @@ package com.ysm.ublog.shiro;
 import com.ysm.ublog.mapper.UserMapper;
 import com.ysm.ublog.user.pojo.T_user;
 
-import com.ysm.ublog.utils.RedisUtils;
-import com.ysm.ublog.utils.ToJson;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.shiro.util.ByteSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-
-import java.util.Map;
 
 public class Myrealm extends AuthenticatingRealm {
 

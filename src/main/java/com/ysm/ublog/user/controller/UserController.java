@@ -3,21 +3,17 @@ package com.ysm.ublog.user.controller;
 import com.ysm.ublog.user.pojo.T_user;
 import com.ysm.ublog.user.service.UserService;
 import com.ysm.ublog.utils.MessageSendUtils;
-import com.ysm.ublog.utils.ToJson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
 
 
 @RestController
@@ -47,10 +43,12 @@ public class UserController {
 
 
     @RequestMapping("login")
-    public String loginbefore(String username,String password){
+    public T_user loginbefore(String username,String password){
         System.out.println(username+"....."+password);
         userService.login(username,password);
-        return "loginsuccess";
+        T_user user = userService.getUserByUsername(username);
+        System.out.println(user);
+        return user;
     }
 
 

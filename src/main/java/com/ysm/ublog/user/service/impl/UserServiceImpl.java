@@ -53,4 +53,9 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public T_user getUserByUsername(String username) {
+        return userMapper.findUserByName(username);
+    }
+
 }

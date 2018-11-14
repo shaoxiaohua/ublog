@@ -1,5 +1,6 @@
 package com.ysm.ublog.user.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
@@ -16,7 +17,9 @@ public class T_user {
     private String major_name;
     private String signature;
     private String user_img;
+    @JsonIgnore
     private String password;
+    @JsonIgnore
     private String salt;
 
     public String getPassword() {
