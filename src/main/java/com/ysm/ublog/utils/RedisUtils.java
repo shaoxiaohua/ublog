@@ -1,6 +1,8 @@
 package com.ysm.ublog.utils;
 
 import com.sun.javaws.jnl.PropertyDesc;
+import com.ysm.ublog.user.pojo.T_user;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -55,9 +57,8 @@ public class RedisUtils {
 
 
     public static int get_user_id() {
-        Jedis jedis=jedisPool.getResource();
-        String uidstr=jedis.get("key");
-        int uid=Integer.parseInt(uidstr);
+        T_user user =(T_user) SecurityUtils.getSubject().getSession().getAttribute("user");
+        int uid=user.getId();
         return uid;
     }
 
