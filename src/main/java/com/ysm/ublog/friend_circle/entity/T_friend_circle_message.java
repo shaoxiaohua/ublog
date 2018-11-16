@@ -1,5 +1,7 @@
 package com.ysm.ublog.friend_circle.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.Date;
 import java.util.List;
 
@@ -67,14 +69,6 @@ public class T_friend_circle_message {
         this.content = content;
     }
 
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
-
     public String getLocation() {
         return location;
     }
@@ -90,6 +84,15 @@ public class T_friend_circle_message {
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
 
     @Override
     public String toString() {

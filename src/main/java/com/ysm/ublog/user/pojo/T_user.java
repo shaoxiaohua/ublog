@@ -2,6 +2,7 @@ package com.ysm.ublog.user.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -16,8 +17,7 @@ public class T_user {
     private String school_name;
     private String major_name;
     private String signature;
-    private String user_img;
-    @JsonIgnore
+    private MultipartFile user_img;
     private String password;
     @JsonIgnore
     private String salt;
@@ -38,7 +38,7 @@ public class T_user {
         this.salt = salt;
     }
 
-    public T_user(int id, String nickname, int gender, String phone, String school_name, String major_name, String signature, String user_img, String password, String salt) {
+    public T_user(int id, String nickname, int gender, String phone, String school_name, String major_name, String signature, MultipartFile user_img, String password, String salt) {
         this.id = id;
         this.nickname = nickname;
         this.gender = gender;
@@ -50,6 +50,7 @@ public class T_user {
         this.password = password;
         this.salt = salt;
     }
+
 
     public int getId() {
         return id;
@@ -107,11 +108,11 @@ public class T_user {
         this.signature = signature;
     }
 
-    public String getUser_img() {
+    public MultipartFile getUser_img() {
         return user_img;
     }
 
-    public void setUser_img(String user_img) {
+    public void setUser_img(MultipartFile user_img) {
         this.user_img = user_img;
     }
 

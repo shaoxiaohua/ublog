@@ -4,9 +4,12 @@ package com.ysm.ublog.shiro;
 import com.ysm.ublog.mapper.UserMapper;
 import com.ysm.ublog.user.pojo.T_user;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.shiro.util.ByteSource;
+
+import java.util.List;
 
 public class Myrealm extends AuthenticatingRealm {
 
@@ -24,10 +27,8 @@ public class Myrealm extends AuthenticatingRealm {
         System.out.println(username+"xxxx");
         T_user user = userMapper.findUserByName(username);
         String password = user.getPassword();
-       /* Integer uid = user.getId();
-        Jedis jedis = jedisPool.getResource();
-        RedisUtils.hSet("ysmLogin",user,jedis);
-        System.out.println(jedis.("ysmLogin", uid.toString())+"xxxxx");*/
+        SecurityUtils.getSubject().getSession().setAttribute("user",user);
+        System.out.println(SecurityUtils.getSubject().getSession().getAttribute("user")+"........");
         String salt = user.getSalt();
         ByteSource bytes = ByteSource.Util.bytes(salt);
 

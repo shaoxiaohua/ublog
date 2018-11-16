@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface FriendCircleMapper {
 
-    List<T_friend_circle_message> getAllMessage();
+    List<T_friend_circle_message> getAllMessage(int uid);
 
     int addFriendMessage(@Param("t_friend_message") T_friend_circle_message t_friend_message);
 

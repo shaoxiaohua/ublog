@@ -4,7 +4,7 @@
         "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace中写的就是该接口的全名称 -->
 <mapper namespace="com.ysm.ublog.mapper.FriendCircleMapper">
-    <insert id="addFriendMessage" parameterType="com.ysm.ublog.friend_circle.entity.T_friend_circle_message">
+    <insert id="addFriendMessage">
         <selectKey keyProperty="t_friend_message.id" order="AFTER" resultType="java.lang.Integer"  >
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -33,8 +33,8 @@
     </resultMap>
     
     <select id="getAllMessage" resultMap="getMessageMap">
-        select fcm.id as fid,fcm.uid,fcm.content,fcm.picture,fcm.location,fcm.createtime,fcc.content as contentc,fcc.create_time from t_friend_circle_message fcm, t_friend_circle_comment fcc
-        where fcm.id=fcc.fcmid
+        select fcm.id as fid,fcm.uid,fcm.content,fcm.picture,fcm.location,fcm.is_own,fcm.createtime,fcc.content as contentc,fcc.create_time from t_friend_circle_message fcm, t_friend_circle_comment fcc
+        where is_own=1 or fcm.uid =#{uid} and fcm.id=fcc.fcmid order by fcm.createtime desc
     </select>
 
     <select id="getAllMessageKey" resultType="string">

@@ -16,7 +16,7 @@ public class FastDfsUtils {
 
     private static TrackerClient trackerClient;
     private static TrackerServer trackerServer;
-    private StorageServer storageServer;
+    private static StorageServer storageServer;
 
     public FastDfsUtils(String configlocation) throws IOException, MyException {
         //classpath:conf.properties ===>从项目路径找这个conf的文件,然后转换成绝对路径
@@ -35,11 +35,11 @@ public class FastDfsUtils {
 
     }
 
-    public String fileUpload(byte[] bs, String ext_name) throws IOException, MyException {
+    public static String fileUpload(byte[] bs, String ext_name) throws IOException, MyException {
         return fileUpload(bs, ext_name, null);
     }
 
-    public String fileUpload(byte[] bs, String ext_name, NameValuePair[] valuePair) throws IOException, MyException {
+    public static String fileUpload(byte[] bs, String ext_name, NameValuePair[] valuePair) throws IOException, MyException {
         StorageClient1 storageClient1 = new StorageClient1(trackerServer, storageServer);
         String[] resultString = storageClient1.upload_file(bs, ext_name, valuePair);
 

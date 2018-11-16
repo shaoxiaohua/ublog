@@ -46,8 +46,8 @@ public class FriendCircleServiceImpl implements FriendCircleService {
 
    //获得所有的朋友圈内容
     @Override
-    public List<T_friend_circle_message> getAllMessage() {
-        List<T_friend_circle_message> messages = frinendCircleMapper.getAllMessage();
+    public List<T_friend_circle_message> getAllMessage(int uid) {
+        List<T_friend_circle_message> messages = frinendCircleMapper.getAllMessage(uid);
         return messages;
     }
 
