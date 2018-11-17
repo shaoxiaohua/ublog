@@ -20,16 +20,16 @@ public class FastDfsUtils {
 
     public FastDfsUtils(String configlocation) throws IOException, MyException {
         //classpath:conf.properties ===>从项目路径找这个conf的文件,然后转换成绝对路径
-        if (configlocation.startsWith("classpath")) {
+        /*if (configlocation.startsWith("classpath")) {
             //从项目路径中查找文件
             configlocation = configlocation.replace("classpath:", getClass().getResource("/").getPath());
 
 //            ClassLoader classLoader = FastDfsUtils.class.getClassLoader();//获取类加载器
 //            String path = classLoader.getResource("/").getPath();//获取项目所在的目录位置
 
-        }
+        }*/
         //"classpath:xxx.conf"
-        ClientGlobal.init(configlocation);
+        ClientGlobal.init("conf.properties");
         trackerClient = new TrackerClient();
         trackerServer = trackerClient.getConnection();
 

@@ -8,6 +8,7 @@
         <result column="picture" property="content"/>
         <result column="user_img" property="user_img"/>
         <result column="commentnum" property="commentnum"/>
+        <result column="content" property="content"/>
     </resultMap>
 
     <select id="findAllRecommend"  resultMap="recommendmap">

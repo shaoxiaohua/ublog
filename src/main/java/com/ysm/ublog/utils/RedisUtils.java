@@ -1,6 +1,5 @@
 package com.ysm.ublog.utils;
 
-import com.sun.javaws.jnl.PropertyDesc;
 import com.ysm.ublog.user.pojo.T_user;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +11,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+
 
 //将对象保存到缓存中
 public class RedisUtils {
